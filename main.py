@@ -46,6 +46,14 @@ async def startup() -> None:
     """
     logger.info("db connection startup")
     await db.connect_to_database(path=settings.DB_URI)
+    traffics_list = await db.entity_get_all()
+    if traffics_list is None or len(traffics_list) == 0:
+        traffic_sample = Traffic(
+            traffic_num="х999км",
+            direction="__ENTRY__",
+            traffic_type="__LIGHT_VEHICLE__",
+            image_url="")
+        await db.entity_add_one(traffic=traffic_sample)
 
 
 @app.on_event("shutdown")

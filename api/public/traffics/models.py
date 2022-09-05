@@ -37,10 +37,10 @@ class Traffic(BaseModel):
     """
     traffic_id: bson.Binary = Field(default_factory=default_uuid_factory, alias="_id")
     time: datetime.datetime = Field(default_factory=datetime.datetime.now)
-    traffic_num: str = Field(...)
-    direction: str = Field(...)
-    traffic_type: str = Field(...)
-    image_url: str = Field(...)
+    traffic_num: str = Field()
+    direction: str = Field()
+    traffic_type: str = Field()
+    image_url: str = Field()
 
     class Config:
         allow_population_by_field_name = True
@@ -49,7 +49,7 @@ class Traffic(BaseModel):
                 "traffic_num": "х999км",
                 "direction": TrafficDirection.ENTRY,
                 "traffic_type": TrafficTypes.LIGHT_VEHICLE,
-                "image_url": "https://storage.yandexcloud.net/some_storage/e8baf12c-f0f6-4592-8abc-8ab19919b4fd.jpg"
+                "image_url": ""
             }
         }
 
@@ -68,6 +68,6 @@ class TrafficUpdate(BaseModel):
                 "traffic_num": "х997км",
                 "direction": TrafficDirection.EXIT,
                 "traffic_type": TrafficTypes.CARGO_VEHICLE,
-                "image_url": "https://storage.yandexcloud.net/some_storage/e8baf12c-f0f6-4592-8abc-8ab19919b4sa.jpg"
+                "image_url": ""
             }
         }
