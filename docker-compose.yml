@@ -1,0 +1,31 @@
+version: "3"
+services:
+  traffic-server:
+    image: fastapi-traffic
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        PIPENV_ARGS: "--dev"
+    container_name: traffic-server
+    restart: unless-stopped
+    env_file: local.env
+    working_dir: "/src"
+    command: uvicorn main:app --reload --host 0.0.0.0 --port 4666
+    ports:
+      - "4666:4666"
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo:latest
+    container_name: mongo-db
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+
+volumes:
+  db-data:
+
