@@ -28,10 +28,9 @@ def database_uri() -> str:
     db_name = os.getenv("MONGODB_NAME", "traffic")
     db_username = os.getenv("MONGODB_USERNAME")
     db_password = os.getenv("MONGODB_PASSWORD")
-    db_auth_db = os.getenv("MONGODB_AUTH_DB", "admin")
 
     client_setup = (
-        f"mongodb://{db_username}:{db_password}@{db_host}:{db_port}/?authMechanism=DEFAULT&authSource={db_auth_db}"
+        f"mongodb://{db_username}:{db_password}@{db_host}:{db_port}/?authMechanism=DEFAULT&authSource={db_name}"
     )
 
     return client_setup

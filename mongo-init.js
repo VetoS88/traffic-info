@@ -9,5 +9,4 @@ db.createUser(
     roles: [{ role: 'readWrite', db: 'traffic' }],
   },
 );
-
 print('user/paswd and collection created')
